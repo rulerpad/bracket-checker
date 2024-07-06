@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/php-fpm/base/Dockerfile
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+    container_name: bracket_checker_app
+    volumes:
+      - ./:/var/www/html/:rw
+      - ./docker/php-fpm/config/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:ro
